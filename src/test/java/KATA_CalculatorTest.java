@@ -69,4 +69,41 @@ class KATA_CalculatorTest {
         kata_Calculator = new KATA_Calculator();
         assertEquals(0, kata_Calculator.addAnyAmountOfNums((String[]) null));
     }
+
+    // Unit test cases for addInputWithNewLineDelimiter method
+    @Test
+    void addInputWithNewLineDelimiterEmptyInputTest() {
+        kata_Calculator = new KATA_Calculator();
+        assertEquals(0, kata_Calculator.addInputWithNewLineDelimiter(""));
+    }
+
+    @Test
+    void addInputWithNewLineDelimiterNullInputTest() {
+        kata_Calculator = new KATA_Calculator();
+        assertEquals(0, kata_Calculator.addInputWithNewLineDelimiter(null));
+    }
+
+    @Test
+    void addInputWithNewLineDelimiterSingleNumberTest() {
+        kata_Calculator = new KATA_Calculator();
+        assertEquals(7, kata_Calculator.addInputWithNewLineDelimiter("7"));
+    }
+
+    @Test
+    void addInputWithNewLineDelimiterTwoNumbersTest() {
+        kata_Calculator = new KATA_Calculator();
+        assertEquals(10, kata_Calculator.addInputWithNewLineDelimiter("3,7"));
+    }
+
+    @Test
+    void addInputWithNewLineDelimiterNewLineDelimiterTest() {
+        kata_Calculator = new KATA_Calculator();
+        assertEquals(6, kata_Calculator.addInputWithNewLineDelimiter("1\n2,3"));
+    }
+
+    @Test
+    void addInputWithNewLineDelimiterMultipleNumbersTest() {
+        kata_Calculator = new KATA_Calculator();
+        assertEquals(15, kata_Calculator.addInputWithNewLineDelimiter("1,2\n3,4\n5"));
+    }
 }

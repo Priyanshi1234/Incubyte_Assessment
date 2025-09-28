@@ -10,6 +10,9 @@ public class KATA_Calculator {
 
         int result3 = new KATA_Calculator().addAnyAmountOfNums((String[]) null);
         System.out.println("Input with any amount of numbers= " + result3);
+
+        int result4 = new KATA_Calculator().addInputWithNewLineDelimiter("1\n2,3");
+        System.out.println("Input with new line delimiter= " + result4);
     }
 
     public int add(String input) {
@@ -35,6 +38,19 @@ public class KATA_Calculator {
             return 0;
         }
         for (String number : input) {
+            sum += Integer.parseInt(number);
+        }
+        return sum;
+    }
+
+    public int addInputWithNewLineDelimiter(String input) {
+        // Case 3: Input with new line delimiter
+        int sum = 0;
+        // Handle empty or null input. return 0 if input is empty
+        if (input == null || input.isEmpty()) {
+            return 0;
+        }
+        for (String number : input.split(",|\n")) {
             sum += Integer.parseInt(number);
         }
         return sum;
