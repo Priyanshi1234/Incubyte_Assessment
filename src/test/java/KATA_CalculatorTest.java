@@ -10,25 +10,25 @@ class KATA_CalculatorTest {
 
     @Test
     void addEmptyStringTest() {
-        KATA_Calculator calculator = new KATA_Calculator();
-        assertEquals(0, calculator.add(""));
+        kata_Calculator = new KATA_Calculator();
+        assertEquals(0, kata_Calculator.add(""));
     }
 
     @Test
     void addSingleNumberTest() {
-        KATA_Calculator calculator = new KATA_Calculator();
-        assertEquals(5, calculator.add("5"));
+        kata_Calculator = new KATA_Calculator();
+        assertEquals(5, kata_Calculator.add("5"));
     }
 
     @Test
     void addTwoNumbersTest() {
-        KATA_Calculator calculator = new KATA_Calculator();
-        assertEquals(8, calculator.add("3,5"));
+        kata_Calculator = new KATA_Calculator();
+        assertEquals(8, kata_Calculator.add("3,5"));
     }
 
     @Test
     void addMultipleNumbersTest() {
-        KATA_Calculator calculator = new KATA_Calculator();
-        assertEquals(15, calculator.add("1,2,3,4,5"));
+        kata_Calculator = new KATA_Calculator();
+        assertEquals(15, kata_Calculator.add("1,2,3,4,5"));
     }
 }
