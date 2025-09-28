@@ -106,4 +106,53 @@ class KATA_CalculatorTest {
         kata_Calculator = new KATA_Calculator();
         assertEquals(15, kata_Calculator.addInputWithNewLineDelimiter("1,2\n3,4\n5"));
     }
+
+    // Unit test cases for addInputWithMultipleDelimiters method
+    @Test
+    void addInputWithMultipleDelimitersEmptyInputTest() {
+        kata_Calculator = new KATA_Calculator();
+        assertEquals(0, kata_Calculator.addInputWithDifferentDelimiters(""));
+    }
+
+    @Test
+    void addInputWithMultipleDelimitersNullInputTest() {
+        kata_Calculator = new KATA_Calculator();
+        assertEquals(0, kata_Calculator.addInputWithDifferentDelimiters(null));
+    }
+
+    @Test
+    void addInputWithMultipleDelimitersSingleNumberTest() {
+        kata_Calculator = new KATA_Calculator();
+        assertEquals(7, kata_Calculator.addInputWithDifferentDelimiters("7"));
+    }
+
+    @Test
+    void addInputWithMultipleDelimitersCommaDelimiterTest() {
+        kata_Calculator = new KATA_Calculator();
+        assertEquals(10, kata_Calculator.addInputWithDifferentDelimiters("3,7"));
+    }
+
+    @Test
+    void addInputWithMultipleDelimitersCustomDelimiterTest() {
+        kata_Calculator = new KATA_Calculator();
+        assertEquals(6, kata_Calculator.addInputWithDifferentDelimiters("//;\n1;2;3"));
+    }
+
+    @Test
+    void addInputWithMultipleDelimitersCustomDelimiterSingleNumberTest() {
+        kata_Calculator = new KATA_Calculator();
+        assertEquals(5, kata_Calculator.addInputWithDifferentDelimiters("//;\n5"));
+    }
+
+    @Test
+    void addInputWithMultipleDelimitersCustomDelimiterEmptyNumbersTest() {
+        kata_Calculator = new KATA_Calculator();
+        assertEquals(0, kata_Calculator.addInputWithDifferentDelimiters("//;\n"));
+    }
+
+    @Test
+    void addInputWithMultipleDelimitersCustomDelimiterMultipleNumbersTest() {
+        kata_Calculator = new KATA_Calculator();
+        assertEquals(15, kata_Calculator.addInputWithDifferentDelimiters("//|\n1|2|3|4|5"));
+    }
 }
