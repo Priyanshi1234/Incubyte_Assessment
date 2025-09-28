@@ -16,6 +16,12 @@ public class KATA_Calculator {
 
         int result5 = new KATA_Calculator().addInputWithDifferentDelimiters("//;\n1;2");
         System.out.println("Input with multiple delimiter= " + result5);
+        try {
+            int result6 = new KATA_Calculator().addInputWithNegativeNumbers("1,-2,3,-4,5");
+            System.out.println("Input with negative numbers= " + result6);
+        } catch (IllegalArgumentException e) {
+            System.out.println(e.getMessage());
+        }
 
     }
 
@@ -82,6 +88,32 @@ public class KATA_Calculator {
             if (number.isEmpty())
                 continue; // Skip empty strings
             sum += Integer.parseInt(number);
+        }
+        return sum;
+    }
+
+    public int addInputWithNegativeNumbers(String input) {
+        // Case 5: Input with negative numbers
+        int sum = 0;
+        StringBuilder negativeNumbers = new StringBuilder();
+
+        // Handle empty or null input. return 0 if input is empty
+        if (input == null || input.isEmpty()) {
+            return 0;
+        }
+        for (String number : input.split(",|\n")) {
+            int num = Integer.parseInt(number);
+            if (num < 0) {
+                if (negativeNumbers.length() > 0) {
+                    negativeNumbers.append(", ");
+                }
+                negativeNumbers.append(num);
+            } else {
+                sum += num;
+            }
+        }
+        if (negativeNumbers.length() > 0) {
+            throw new IllegalArgumentException("Negative numbers are not allowed: " + negativeNumbers);
         }
         return sum;
     }

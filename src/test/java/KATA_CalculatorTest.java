@@ -155,4 +155,50 @@ class KATA_CalculatorTest {
         kata_Calculator = new KATA_Calculator();
         assertEquals(15, kata_Calculator.addInputWithDifferentDelimiters("//|\n1|2|3|4|5"));
     }
+
+    // Unit test cases for addInputWithNegativeNumbers method
+    @Test
+    void addInputWithNegativeNumbersEmptyInputTest() {
+        kata_Calculator = new KATA_Calculator();
+        assertEquals(0, kata_Calculator.addInputWithNegativeNumbers(""));
+    }
+
+    @Test
+    void addInputWithNegativeNumbersNullInputTest() {
+        kata_Calculator = new KATA_Calculator();
+        assertEquals(0, kata_Calculator.addInputWithNegativeNumbers(null));
+    }
+
+    @Test
+    void addInputWithNegativeNumbersNoNegativeNumbersTest() {
+        kata_Calculator = new KATA_Calculator();
+        assertEquals(10, kata_Calculator.addInputWithNegativeNumbers("3,7"));
+    }
+
+    @Test
+    void addInputWithNegativeNumbersSingleNegativeNumberTest() {
+        kata_Calculator = new KATA_Calculator();
+        IllegalArgumentException exception = assertThrows(IllegalArgumentException.class, () -> {
+            kata_Calculator.addInputWithNegativeNumbers("3,-7");
+        });
+        assertEquals("Negative numbers are not allowed: -7", exception.getMessage());
+    }
+
+    @Test
+    void addInputWithNegativeNumbersMultipleNegativeNumbersTest() {
+        kata_Calculator = new KATA_Calculator();
+        IllegalArgumentException exception = assertThrows(IllegalArgumentException.class, () -> {
+            kata_Calculator.addInputWithNegativeNumbers("1,-2,3,-4,5");
+        });
+        assertEquals("Negative numbers are not allowed: -2, -4", exception.getMessage());
+    }
+
+    @Test
+    void addInputWithNegativeNumbersMixedNumbersTest() {
+        kata_Calculator = new KATA_Calculator();
+        IllegalArgumentException exception = assertThrows(IllegalArgumentException.class, () -> {
+            kata_Calculator.addInputWithNegativeNumbers("-1,2,-3,4");
+        });
+        assertEquals("Negative numbers are not allowed: -1, -3", exception.getMessage());
+    }
 }
