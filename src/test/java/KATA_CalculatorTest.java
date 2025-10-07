@@ -278,4 +278,10 @@ class KATA_CalculatorTest {
         assertEquals("Negative numbers are not allowed: -1, -3",
                 exception.getMessage());
     }
+
+    @Test
+    void addWithAllCombinationsAsterixAsDelimeter() {
+        kata_Calculator = new KATA_Calculator();
+        assertEquals(10, kata_Calculator.addWithAllCombinations("//*\n1*2*5"));
+    }
 }

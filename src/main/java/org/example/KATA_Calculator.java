@@ -34,12 +34,64 @@ public class KATA_Calculator {
 
         // Case 6: Final method with all combinations
         try {
-            int result7 = new KATA_Calculator().addWithAllCombinations("1,4,5,6,7", "//;\n1;2", "3\n4,5", "6,-7,8");
+            int result7 = new KATA_Calculator().addWithAllCombinations("1,4,5,6,7", "//;\n1;2", "3\n4,5", "6,7,8");
             System.out.println("Input with all combinations= " + result7);
         } catch (IllegalArgumentException e) {
             System.out.println(e.getMessage());
         }
 
+    }
+
+    public int addWithAllCombinations(String... input) {
+        // Case 6: Input with all combinations
+        int sum = 0;
+
+        // Handle empty or null input. return 0 if input is empty
+        if (input == null || input.length == 0) {
+            return 0;
+        }
+        for (String str : input) {
+            if (str == null || str.isEmpty()) {
+                continue; // Skip empty strings
+            }
+            String delimiter = ",";
+            if (str.startsWith("//")) {
+                int delimiterEndIndex = str.indexOf("\n");
+                delimiter = str.substring(2, delimiterEndIndex);
+                str = str.substring(delimiterEndIndex + 1);
+            }
+            String regexDelimiter = "\\" + delimiter;
+            Boolean isMultiplicationCalculation = delimiter.equals("*");
+
+            if (isMultiplicationCalculation)
+                sum = 1; // Initialize sum to 1 for multiplication
+            // Escape special characters for regex
+            delimiter = regexDelimiter + "|,|\n";
+            // Combine with default delimiters
+
+            StringBuilder negativeNumbers = new StringBuilder();
+            for (String number : str.split(delimiter)) {
+                if (number.isEmpty())
+                    continue; // Skip empty strings
+                int num = Integer.parseInt(number);
+                if (num < 0) {
+                    if (negativeNumbers.length() > 0) {
+                        negativeNumbers.append(", ");
+                    }
+                    negativeNumbers.append(num);
+                } else {
+                    if (isMultiplicationCalculation) {
+                        sum *= num;
+                    } else {
+                        sum += num;
+                    }
+                }
+            }
+            if (negativeNumbers.length() > 0) {
+                throw new IllegalArgumentException("Negative numbers are not allowed: " + negativeNumbers);
+            }
+        }
+        return sum;
     }
 
     // public int add(String input) {
@@ -137,45 +189,4 @@ public class KATA_Calculator {
     // return sum;
     // }
 
-    public int addWithAllCombinations(String... input) {
-        // Case 6: Input with all combinations
-        int sum = 0;
-
-        // Handle empty or null input. return 0 if input is empty
-        if (input == null || input.length == 0) {
-            return 0;
-        }
-        for (String str : input) {
-            if (str == null || str.isEmpty()) {
-                continue; // Skip empty strings
-            }
-            String delimiter = ",";
-            if (str.startsWith("//")) {
-                int delimiterEndIndex = str.indexOf("\n");
-                delimiter = str.substring(2, delimiterEndIndex);
-                str = str.substring(delimiterEndIndex + 1);
-            }
-            String regexDelimiter = "\\" + delimiter; // Escape special characters for regex
-            delimiter = regexDelimiter + "|,|\n"; // Combine with default delimiters
-
-            StringBuilder negativeNumbers = new StringBuilder();
-            for (String number : str.split(delimiter)) {
-                if (number.isEmpty())
-                    continue; // Skip empty strings
-                int num = Integer.parseInt(number);
-                if (num < 0) {
-                    if (negativeNumbers.length() > 0) {
-                        negativeNumbers.append(", ");
-                    }
-                    negativeNumbers.append(num);
-                } else {
-                    sum += num;
-                }
-            }
-            if (negativeNumbers.length() > 0) {
-                throw new IllegalArgumentException("Negative numbers are not allowed: " + negativeNumbers);
-            }
-        }
-        return sum;
-    }
 }
